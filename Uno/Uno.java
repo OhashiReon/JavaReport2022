@@ -4,6 +4,48 @@ import java.util.Scanner;
 import java.util.Collections;
 import java.util.InputMismatchException;
 
+public class Uno {
+    public static void main(String[] args){
+        Cards yama = new Cards();
+        Card nowCard;
+        yama.yamaInit();
+        yama.shuffle();
+        nowCard = yama.randomPop();
+        yama.add(nowCard);
+        Iplayable player1 = new HumanPlayer("自分");
+        Iplayable player2 = new ComputerPlayer("相手");
+        for(int i = 0;i<6;i++){
+            player1.add(yama.randomPop());
+            player2.add(yama.randomPop());
+        }
+        Iplayable nowPlayer = player1;
+        int i =1;
+        while(true){
+            System.out.println(i+"ターン目=====================");
+            System.out.println("現在のカードは");
+            nowCard.show();
+            System.out.println();
+            nowPlayer.show();
+            if(nowPlayer.CanReturn(nowCard)){
+                nowCard = nowPlayer.returnCard(nowCard);
+                yama.add(nowCard);
+            }else{
+                nowPlayer.add(yama.randomPop());
+            }
+            if(nowPlayer.isWin()){
+                System.out.println(nowPlayer.getName()+"の勝利です");
+                break;
+            }
+            if(nowPlayer == player1){
+                nowPlayer = player2;
+            }else{
+                nowPlayer =player1;
+            }
+            i++;
+        }
+    }
+}
+
 class Card{
     String color = "";
     int number = 0;
@@ -115,11 +157,14 @@ class HumanPlayer implements Iplayable{
         Card returnCard;
         int num=-1;
         while(true){
-            System.out.println("0~"+returnableCards.size()+"の範囲で入力してください");
+            System.out.println("0~"+(returnableCards.size()-1)+"の範囲で入力してください");
             try{
                 Scanner sc = new Scanner(System.in);
                 num = sc.nextInt();
-                break;
+                if(0<=num&&num<returnableCards.size()){
+                    break;
+                }
+                System.out.println("範囲外です");
             }catch (InputMismatchException e){
                 System.out.println("数字で入力してください");
             }
@@ -143,6 +188,9 @@ class HumanPlayer implements Iplayable{
             return true;
         }else{
             System.out.println("あなたの出せるカードがないので一枚引きます");
+            System.out.println("(何か文字を入力してカードを一枚引く...)");
+            Scanner sc = new Scanner(System.in);
+            sc.nextLine();
             return false;
         }
     }
@@ -206,44 +254,4 @@ class ComputerPlayer implements Iplayable{
 }
 
 
-public class Uno {
-    public static void main(String[] args){
-        Cards yama = new Cards();
-        Card nowCard;
-        yama.yamaInit();
-        yama.shuffle();
-        nowCard = yama.randomPop();
-        yama.add(nowCard);
-        Iplayable player1 = new HumanPlayer("自分");
-        Iplayable player2 = new ComputerPlayer("相手");
-        for(int i = 0;i<6;i++){
-            player1.add(yama.randomPop());
-            player2.add(yama.randomPop());
-        }
-        Iplayable nowPlayer = player1;
-        int i =1;
-        while(true){
-            System.out.println(i+"ターン目=====================");
-            System.out.println("現在のカードは");
-            nowCard.show();
-            System.out.println();
-            nowPlayer.show();
-            if(nowPlayer.CanReturn(nowCard)){
-                nowCard = nowPlayer.returnCard(nowCard);
-                yama.add(nowCard);
-            }else{
-                nowPlayer.add(yama.randomPop());
-            }
-            if(nowPlayer.isWin()){
-                System.out.println(nowPlayer.getName()+"の勝利です");
-                break;
-            }
-            if(nowPlayer == player1){
-                nowPlayer = player2;
-            }else{
-                nowPlayer =player1;
-            }
-            i++;
-        }
-    }
-}
+
