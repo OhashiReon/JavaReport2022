@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
 
 public class Hanoi{
     public static void main(String[] args){
-        Towers towers = new Towers(InputInt());
+        Towers towers = new Towers(InputIntPos());
         towers.solve();
     }
     static int InputInt(){
@@ -19,6 +19,17 @@ public class Hanoi{
                 System.out.println("数字で入力してください");
             }
         }
+    }
+    static int InputIntPos(){
+        int r = 0;
+        while(true){
+            r = InputInt();
+            if(r>=0){
+                break;
+            }
+            System.out.println("正の数で入力してください");
+        }
+        return r;
     }
 }
 
