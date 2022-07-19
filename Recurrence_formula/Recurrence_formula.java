@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 class Recurrence_formula{
     public static void main(String[] args){
-        int first = 1;
-        int ratio= 2;
-        int cons = 1;
-        int ans = first;
+        float first = 1;
+        float ratio= 2;
+        float cons = 1;
+        float ans = first;
         int i = 1;
-        List<Integer> l = new ArrayList<Integer>(); 
+        List<Float> l = new ArrayList<Float>(); 
         l.add(ans);
         while(i < 20 && ans <= 100){
             i += 1;
