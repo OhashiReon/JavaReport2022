@@ -115,11 +115,14 @@ class HumanPlayer implements Iplayable{
         Card returnCard;
         int num=-1;
         while(true){
-            System.out.println("0~"+returnableCards.size()+"の範囲で入力してください");
+            System.out.println("0~"+(returnableCards.size()-1)+"の範囲で入力してください");
             try{
                 Scanner sc = new Scanner(System.in);
                 num = sc.nextInt();
-                break;
+                if(0<=num&&num<returnableCards.size()){
+                    break;
+                }
+                System.out.println("範囲外です");
             }catch (InputMismatchException e){
                 System.out.println("数字で入力してください");
             }
