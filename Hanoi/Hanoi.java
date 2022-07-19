@@ -4,6 +4,24 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+public class Hanoi{
+    public static void main(String[] args){
+        Towers towers = new Towers(InputInt());
+        towers.solve();
+    }
+    static int InputInt(){
+        while(true){
+            System.out.println("ハノイの塔の段数を入力してください");
+            try{
+                Scanner sc = new Scanner(System.in);
+                return sc.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("数字で入力してください");
+            }
+        }
+    }
+}
+
 class Towers{
     int n;
     List<ArrayList<Integer>> towers;
@@ -52,24 +70,5 @@ class Towers{
         towers.get(from).remove(towers.get(from).size()-1);
         towers.get(to).add(num);
         move(num-1,tmp,to);
-    }
-}
-
-
-public class Hanoi{
-    public static void main(String[] args){
-        Towers towers = new Towers(InputInt());
-        towers.solve();
-    }
-    static int InputInt(){
-        while(true){
-            System.out.println("ハノイの塔の段数を入力してください");
-            try{
-                Scanner sc = new Scanner(System.in);
-                return sc.nextInt();
-            }catch (InputMismatchException e){
-                System.out.println("数字で入力してください");
-            }
-        }
     }
 }
