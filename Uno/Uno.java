@@ -188,6 +188,9 @@ class HumanPlayer implements Iplayable{
             return true;
         }else{
             System.out.println("あなたの出せるカードがないので一枚引きます");
+            System.out.println("(何か文字を入力してカードを一枚引く...)");
+            Scanner sc = new Scanner(System.in);
+            sc.nextLine();
             return false;
         }
     }
