@@ -14,7 +14,7 @@ class Recurrence_formula{
             ans = ans* ratio + cons;
             l.add(ans);
         }
-        System.out.println(ans+" "+i);
-        System.out.println(l);
+        System.out.println("n="+ans+" 項数="+i);
+        System.out.println("すべての項"+l);
     }
 }
